@@ -1,6 +1,5 @@
 import logging
 import torch
-import timeit
 import sounddevice as sd
 from pathlib import Path
 from torch.package import package_importer
@@ -68,6 +67,16 @@ class TTS:
         return tts_model
 
     def speak(self, lines: list[str]) -> None:
+        """
+        Speaks a text line by line
+
+        parameters:
+            lines: a list of sentences
+
+        returns:
+            None
+        """
+
         logging.info(f"Speaking {len(lines)} lines")
         current_line = 1
 
