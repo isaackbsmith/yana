@@ -5,7 +5,7 @@ from pathlib import Path
 from torch.package import package_importer
 from omegaconf import DictConfig, ListConfig
 
-from yana.scripts.downloader import download_from_torch_hub
+from yana.utils.downloader import download_from_torch_hub
 
 
 class TTS:

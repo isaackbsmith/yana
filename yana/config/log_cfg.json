@@ -10,7 +10,7 @@
 			"datefmt": "%Y-%m-%dT%H:%M:%S%z"
 		},
 		"json": {
-			"()": "yana.scripts.json_log_fmtr.JSONFormatter",
+			"()": "yana.utils.json_log_fmtr.JSONFormatter",
 			"fmt_keys": {
 				"level": "levelname",
 				"message": "message",
