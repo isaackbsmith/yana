@@ -1,6 +1,5 @@
 # YANA
 logs/
-data/
 *.db
 
 # Byte-compiled / optimized / DLL files
