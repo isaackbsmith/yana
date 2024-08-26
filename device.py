@@ -5,7 +5,7 @@ from pathlib import Path
 
 from omegaconf import OmegaConf
 
-from yana.lib.tts import TTS
+from yana.direct.tts import TTS
 
 logger = logging.getLogger(__name__)
 
