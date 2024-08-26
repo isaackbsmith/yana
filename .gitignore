@@ -1,6 +1,7 @@
 # YANA
 logs/
 *.db
+.mighist
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
