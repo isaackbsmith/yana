@@ -3,8 +3,7 @@ import argparse
 from pathlib import Path
 import sqlite3
 
-from yana.domain.db import DB
-
+from yana.data.database import DB
 
 def sort_migrations(migrations: list[Path]) -> list[Path]:
     """
@@ -72,7 +71,7 @@ def execute_migration(db_path: Path, migration: Path) -> None:
     returns:
         None
     """
-    with DB(db_path) as db:
+    with DB(db_path, sqlite3.Row) as db:
         print(f"Executing migration: {migration}")
         db.cursor.executescript(migration.read_text())
         print("Finished executing migration")
@@ -190,7 +189,7 @@ def main() -> None:
 
         if args.validate:
             validate_migration(MIGRATIONS_DIR)
-        
+
         if args.migrate:
             run_migrations(db_path, MIGRATIONS_DIR, MIGRATIONS_HISTORY)
 

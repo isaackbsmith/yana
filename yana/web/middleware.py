@@ -1,11 +1,10 @@
 import http
 import time
-import logging
 from typing import Callable
 from fastapi import Request
 
+from yana.web.logger import logger
 
-logger = logging.getLogger(__name__)
 
 async def log_request_middleware(request: Request, call_next: Callable):
     """

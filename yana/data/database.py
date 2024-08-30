@@ -1,16 +1,76 @@
-from pathlib import Path
 import sqlite3
+from pathlib import Path
+from pydantic import BaseModel
+from typing import Any, Callable, Literal, TypeVar
+
+from yana.domain.types import YANAConfig
+from yana.web.logger import logger
+
+
+T = TypeVar("T", bound=BaseModel)
+
+RowFactory = Callable[[sqlite3.Cursor, tuple], T]
 
 
 class DB:
-    def __init__(self, db_path: Path) -> None:
+    def __init__(self,
+                 db_path: Path,
+                 row_factory: RowFactory) -> None:
         self.db_path = db_path
+        self.row_factory = row_factory
 
     def __enter__(self):
         self.connection: sqlite3.Connection = sqlite3.connect(self.db_path)
-        self.connection.row_factory = sqlite3.Row
+        self.connection.row_factory = self.row_factory
         self.cursor: sqlite3.Cursor = self.connection.cursor()
         return self
 
     def __exit__(self, exec_type, exec_value, exec_traceback):
         self.connection.close()
+
+
+def get_row_factory(factory: type[T]) -> RowFactory:
+    def row_factory(cursor: sqlite3.Cursor, row: tuple) -> T:
+        columns = [column[0] for column in cursor.description]
+        return factory(**dict(zip(columns, row)))
+    return row_factory
+
+
+async def run_query(
+    config: YANAConfig,
+    sql: str,
+    params: dict[str, Any] | None,
+    factory: type[T],
+    pragma: Literal["one", "all","many"] | None = None,
+    limit: int = 1) -> list[T] | T | None:
+
+    db_path = Path(config.database.path).resolve()
+    row_factory = get_row_factory(factory)
+
+    with DB(db_path, row_factory) as db:
+        try:
+            logger.info("Executing query")
+
+            if params:
+                cursor = db.cursor.execute(sql, params)
+            else:
+                cursor = db.cursor.execute(sql)
+
+            if pragma is None:
+                db.connection.commit()
+                return None
+
+            if pragma == "one":
+                result = cursor.fetchone()
+            elif pragma == "many":
+                result = cursor.fetchmany(limit)
+            else:
+                result = cursor.fetchmany()
+
+            return result
+        except sqlite3.IntegrityError as e:
+            logger.warn(f"Integrity Error: {e}")
+        except sqlite3.ProgrammingError as e:
+            logger.warn(f"Programming Error: {e}")
+        except sqlite3.Error as e:
+            logger.warn(f"Error executing query: {e}")

@@ -34,7 +34,7 @@ def create_migration_file(args: argparse.Namespace, migration_file: Path) -> Non
                     SET
                         created_at = strftime('%s', 'now'),
                         updated_at = strftime('%s', 'now')
-                    WHERE id = new.id;
+                    WHERE id = NEW.id;
                 END;
 
                 CREATE TRIGGER update_{args.name}_timestamps
@@ -42,7 +42,7 @@ def create_migration_file(args: argparse.Namespace, migration_file: Path) -> Non
                 BEGIN
                     UPDATE {args.name}
                     SET updated_at = strftime('%s', 'now')
-                    WHERE id = new.id;
+                    WHERE id = NEW.id;
                 END;
             \n""").strip()
 

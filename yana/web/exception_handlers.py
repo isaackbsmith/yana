@@ -1,13 +1,11 @@
 import sys
-import logging
 from fastapi import Request
 from fastapi.exceptions import RequestValidationError, HTTPException
 from fastapi.exception_handlers import http_exception_handler as _http_exception_handler
 from fastapi.exception_handlers import request_validation_exception_handler as _request_validation_exception_handler
 from fastapi.responses import JSONResponse, PlainTextResponse, Response
 
-
-logger = logging.getLogger(__name__)
+from yana.web.logger import logger
 
 
 async def request_validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:

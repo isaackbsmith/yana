@@ -34,7 +34,7 @@ async def main() -> None:
     ]
 
     tts_config = OmegaConf.load("yana/config/tts_cfg.yml")
-    silero_models_info = OmegaConf.load("yana/data/silero_models_info.yml")
+    silero_models_info = OmegaConf.load("yana/static/silero_models_info.yml")
 
     config = OmegaConf.merge(tts_config, silero_models_info)
 

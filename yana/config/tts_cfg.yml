@@ -20,7 +20,7 @@ urls:
     model_uri: "https://models.silero.ai/models/tts/en/v3_en.pt"
 
 paths:
-    config_path: "yana/data/latest_silero_models.yml"
-    model_path: "yana/data/models/tts_model.pt"
+    config_path: "yana/static/latest_silero_models.yml"
+    model_path: "yana/static/models/tts_model.pt"
 
 

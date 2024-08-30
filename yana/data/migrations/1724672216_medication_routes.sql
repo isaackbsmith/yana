@@ -19,7 +19,7 @@ BEGIN
     SET
         created_at = strftime('%s', 'now'),
         updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
 
 CREATE TRIGGER update_medication_routes_timestamps
@@ -27,5 +27,5 @@ AFTER INSERT ON medication_routes
 BEGIN
     UPDATE medication_routes
     SET updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;

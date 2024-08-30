@@ -23,7 +23,7 @@ BEGIN
     SET
         created_at = strftime('%s', 'now'),
         updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
 
 CREATE TRIGGER update_appointments_timestamps
@@ -31,5 +31,5 @@ AFTER INSERT ON appointments
 BEGIN
     UPDATE appointments
     SET updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;

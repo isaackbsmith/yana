@@ -40,7 +40,7 @@ BEGIN
     SET
         created_at = strftime('%s', 'now'),
         updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
 
 CREATE TRIGGER update_adherence_slots_timestamps
@@ -48,5 +48,5 @@ AFTER INSERT ON adherence_slots
 BEGIN
     UPDATE adherence_slots
     SET updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;

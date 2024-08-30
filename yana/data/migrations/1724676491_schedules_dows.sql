@@ -18,7 +18,7 @@ BEGIN
     SET
         created_at = strftime('%s', 'now'),
         updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
 
 CREATE TRIGGER update_schedules_dows_timestamps
@@ -26,5 +26,5 @@ AFTER INSERT ON schedules_dows
 BEGIN
     UPDATE schedules_dows
     SET updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;

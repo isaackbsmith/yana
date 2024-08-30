@@ -5,12 +5,13 @@ CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(36) PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
+    email TEXT,
     phone_number VARCHAR(20) NOT NULL CHECK (length(phone_number) >= 10),
     gender VARCHAR(20),
     password TEXT NOT NULL,
-    type VARCHAR(255) NOT NULL CHECK (type IN ("primary", "auxiliary", "professional")),
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL
+    user_type VARCHAR(255) NOT NULL CHECK (user_type IN ("primary", "auxiliary", "professional")),
+    created_at INTEGER,
+    updated_at INTEGER
 ) WITHOUT ROWID;
 
 
@@ -22,7 +23,7 @@ BEGIN
     SET
         created_at = strftime('%s', 'now'),
         updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
 
 CREATE TRIGGER update_users_timestamps
@@ -30,5 +31,5 @@ AFTER INSERT ON users
 BEGIN
     UPDATE users
     SET updated_at = strftime('%s', 'now')
-    WHERE id = new.id;
+    WHERE id = NEW.id;
 END;
