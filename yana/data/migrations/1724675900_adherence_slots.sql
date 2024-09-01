@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS adherence_slots (
     adherence_status VARCHAR(255) CHECK (adherence_status IN (
         'fully_adherent',
         'partially_adherent',
-        'not_adherence',
+        'not_adherent',
         'temporarily_exempt',
         'not_relevant'
     )),
@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS adherence_slots (
     non_adherence_reason TEXT,
     notes TEXT,
     schedule_id VARCHAR(36),
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL,
+    created_at INTEGER,
+    updated_at INTEGER,
     FOREIGN KEY (schedule_id)
         REFERENCES schedules (id)
             ON DELETE SET NULL

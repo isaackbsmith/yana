@@ -1,8 +1,7 @@
 from yana.data.database import run_query
-from yana.data.schemas import NewUserSchema, UserSchema
+from yana.data.schemas.user import NewUserSchema, UserSchema
+from yana.domain.exceptions import DatabaseError, QueryError
 from yana.domain.types import YANAConfig
-from yana.web.logger import logger
-
 
 async def select_user(config: YANAConfig, user_id: str):
     sql = """
@@ -18,15 +17,13 @@ async def select_user(config: YANAConfig, user_id: str):
         WHERE id = :id
     """
     try:
-        logger.info("Selecting user")
         return await run_query(config=config,
                                  sql=sql,
                                  params={"id": user_id},
                                  factory=UserSchema,
                                  pragma="one")
-    except Exception as e:
-        logger.info(f"Error selecting new user: {e}")
-
+    except DatabaseError:
+        raise QueryError("Error selecting new user")
 
 async def insert_user(config: YANAConfig, user: NewUserSchema):
     sql = """
@@ -38,7 +35,7 @@ async def insert_user(config: YANAConfig, user: NewUserSchema):
             phone_number,
             password,
             gender,
-            user_type,
+            user_type
         ) VALUES (
             :id,
             :first_name,
@@ -47,18 +44,17 @@ async def insert_user(config: YANAConfig, user: NewUserSchema):
             :phone_number,
             :password,
             :gender,
-            :user_type,
+            :user_type
         );
         """
     try:
-        logger.info("Inserting new user")
         return await run_query(
             config=config,
             sql=sql,
             params=user.model_dump(),
-            factory=NewUserSchema)
-    except Exception as e:
-        logger.warn(f"Error inserting new user: {e}")
+            factory=UserSchema)
+    except DatabaseError:
+        raise QueryError("Error inserting new user")
 
 
 async def update_user(config: YANAConfig, user: UserSchema):
@@ -74,14 +70,13 @@ async def update_user(config: YANAConfig, user: UserSchema):
         WHERE id = :id;
         """
     try:
-        logger.info("Updating user")
         return await run_query(
             config=config,
             sql=sql,
             params=user.model_dump(),
             factory=UserSchema)
-    except Exception as e:
-        logger.warn(f"Error Updating user: {e}")
+    except DatabaseError:
+        raise QueryError("Error updating user")
 
 
 async def delete_user(config: YANAConfig, user_id: str):
@@ -89,11 +84,10 @@ async def delete_user(config: YANAConfig, user_id: str):
         DELETE FROM users WHERE id = :id;
         """
     try:
-        logger.info("Deleting user")
         return await run_query(
             config=config,
             sql=sql,
             params={"id": user_id},
             factory=UserSchema)
-    except Exception as e:
-        logger.warn(f"Error Deleting user: {e}")
+    except DatabaseError:
+        raise QueryError("Error deleting user")

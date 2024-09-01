@@ -3,10 +3,13 @@
 -- Entity table
 CREATE TABLE IF NOT EXISTS schedules_dows (
     schedule_id VARCHAR(36),
-    day_of_week VARCHAR(20),
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL,
-    PRIMARY KEY (schedule_id, day_of_week)
+    day_of_week VARCHAR(3),
+    created_at INTEGER,
+    updated_at INTEGER,
+    PRIMARY KEY (schedule_id, day_of_week),
+    FOREIGN KEY (schedule_id) REFERENCES schedules (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 ) WITHOUT ROWID;
 
 

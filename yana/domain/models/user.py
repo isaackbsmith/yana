@@ -26,9 +26,8 @@ class UserType(str, Enum):
                 return user_type
         raise ValueError(f"{value} must be a valid user type")
 
-# User Model
-class UserModel(BaseModel):
-    id: str
+
+class BaseUserModel(BaseModel):
     first_name: str
     last_name: str
     email: EmailStr
@@ -37,5 +36,9 @@ class UserModel(BaseModel):
     user_type: UserType
 
 
-class NewUserModel(UserModel):
+class UserModel(BaseUserModel):
+    id: str
+
+
+class NewUserModel(BaseUserModel):
     password: str

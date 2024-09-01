@@ -1,10 +1,12 @@
+from typing import cast
 import uuid
 import bcrypt
 from yana.data.queries.users import delete_user, insert_user, select_user, update_user
-from yana.data.schemas import NewUserSchema, UserSchema
-from yana.domain.models import Gender, NewUserModel, UserModel, UserType
+from yana.data.schemas.user import NewUserSchema, UserSchema
+from yana.domain.exceptions import QueryError, ServiceError
+from yana.domain.models.user import Gender, NewUserModel, UserModel, UserType
 from yana.domain.types import YANAConfig
-from yana.web.logger import logger
+from yana.domain.logger import api_logger
 
 
 async def fetch_user(config: YANAConfig, user_id: str) -> UserModel | None:
@@ -22,13 +24,12 @@ async def fetch_user(config: YANAConfig, user_id: str) -> UserModel | None:
             )
             return user
         return None
-    except Exception as e:
-        logger.warn(f"An error occurred fetching user: {e}")
-        raise
+    except QueryError:
+        api_logger.error("An error occurred fetching user")
+        raise ServiceError("User Service Error")
 
 
 async def create_user(config: YANAConfig, user: NewUserModel) -> None:
-    logger.info("Service: Creating new user")
 
     # hash password
     hashed_pw = bcrypt.hashpw(user.password.encode("utf-8"), bcrypt.gensalt())
@@ -50,12 +51,12 @@ async def create_user(config: YANAConfig, user: NewUserModel) -> None:
 
     try:
         await insert_user(config, new_user)
-    except Exception as e:
-        logger.info(f"An error occured: {e}")
-        raise
+    except QueryError:
+        api_logger.error("An error occurred creating user")
+        raise ServiceError("User Service Error")
 
 
-async def modify_user(config: YANAConfig, user: UserModel) -> UserModel | None:
+async def modify_user(config: YANAConfig, user: UserModel) -> UserModel:
     updated_user = UserSchema(
         id = user.id,
         first_name = user.first_name,
@@ -68,18 +69,18 @@ async def modify_user(config: YANAConfig, user: UserModel) -> UserModel | None:
 
     try:
         await update_user(config, updated_user)
-        return await fetch_user(config, updated_user.id)
-    except Exception as e:
-        logger.info(f"An error occured: {e}")
-        raise
+        return cast(UserModel, await fetch_user(config, updated_user.id))
+    except QueryError:
+        api_logger.error("An error occurred updating user")
+        raise ServiceError("User Service Error")
 
 
 async def remove_user(config: YANAConfig, user_id: str) -> None:
     try:
         await delete_user(config, user_id)
-    except Exception as e:
-        logger.info(f"An error occured: {e}")
-        raise
+    except QueryError:
+        api_logger.error("An error occurred deleting user")
+        raise ServiceError("User Service Error")
 
 
 

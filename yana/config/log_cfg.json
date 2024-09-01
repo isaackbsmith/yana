@@ -36,11 +36,19 @@
 			"formatter": "detailed",
 			"stream": "ext://sys.stderr"
 		},
-		"file": {
+		"root_file": {
 			"class": "logging.handlers.RotatingFileHandler",
 			"level": "DEBUG",
 			"formatter": "json",
-			"filename": "yana/logs/yana.jsonl",
+			"filename": "yana/logs/yana_root.jsonl",
+			"maxBytes": 10000,
+			"backupCount": 3
+		},
+		"api_file": {
+			"class": "logging.handlers.RotatingFileHandler",
+			"level": "DEBUG",
+			"formatter": "json",
+			"filename": "yana/logs/yana_api.jsonl",
 			"maxBytes": 10000,
 			"backupCount": 3
 		}
@@ -51,7 +59,15 @@
 			"handlers": [
 				"stdout",
 				"stderr",
-				"file"
+				"root_file"
+			]
+		},
+		"api": {
+			"level": "DEBUG",
+			"handlers": [
+				"stdout",
+				"stderr",
+				"api_file"
 			]
 		}
 	}

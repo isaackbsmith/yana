@@ -4,6 +4,7 @@ logs/
 .mighist
 *.pt
 *.model
+scratch.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

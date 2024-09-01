@@ -4,7 +4,8 @@ from pydantic import BaseModel
 from typing import Any, Callable, Literal, TypeVar
 
 from yana.domain.types import YANAConfig
-from yana.web.logger import logger
+from yana.domain.logger import root_logger
+from yana.domain.exceptions import DatabaseError
 
 
 T = TypeVar("T", bound=BaseModel)
@@ -49,8 +50,6 @@ async def run_query(
 
     with DB(db_path, row_factory) as db:
         try:
-            logger.info("Executing query")
-
             if params:
                 cursor = db.cursor.execute(sql, params)
             else:
@@ -65,12 +64,9 @@ async def run_query(
             elif pragma == "many":
                 result = cursor.fetchmany(limit)
             else:
-                result = cursor.fetchmany()
+                result = cursor.fetchall()
 
             return result
-        except sqlite3.IntegrityError as e:
-            logger.warn(f"Integrity Error: {e}")
-        except sqlite3.ProgrammingError as e:
-            logger.warn(f"Programming Error: {e}")
         except sqlite3.Error as e:
-            logger.warn(f"Error executing query: {e}")
+            root_logger.error(f"Error executing query: {e}")
+            raise DatabaseError(str(e))

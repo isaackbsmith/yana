@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(36) PRIMARY KEY,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
-    email TEXT,
+    email TEXT UNIQUE,
     phone_number VARCHAR(20) NOT NULL CHECK (length(phone_number) >= 10),
     gender VARCHAR(20),
     password TEXT NOT NULL,

@@ -2,12 +2,13 @@
 
 -- Entity table
 CREATE TABLE IF NOT EXISTS dosage_forms (
-    id VARCHAR(36) PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255) UNIQUE NOT NULL,
     friendly_name VARCHAR(255),
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL
-) WITHOUT ROWID;
+    description TEXT,
+    created_at INTEGER,
+    updated_at INTEGER
+);
 
 
 -- Triggers for automatic creation and updation timestamps (UNIX epoch)

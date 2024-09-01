@@ -3,10 +3,10 @@ import time
 from typing import Callable
 from fastapi import Request
 
-from yana.web.logger import logger
+from yana.domain.logger import api_logger
 
 
-async def log_request_middleware(request: Request, call_next: Callable):
+async def log_requests(request: Request, call_next: Callable):
     """
     Log all requests and thier processing time
     E.g log: 0.0.0.0:8000 - GET /test 200 OK 1.00ms
@@ -19,7 +19,7 @@ async def log_request_middleware(request: Request, call_next: Callable):
     returns:
         response
     """
-    logger.debug("middleware::log_request_middleware")
+    api_logger.debug("middleware::log_request_middleware")
     url = f"{request.url.path}?{request.query_params}" if request.query_params else request.url.path
     start_time = time.time()
     response = await call_next(request)
@@ -33,6 +33,6 @@ async def log_request_middleware(request: Request, call_next: Callable):
     except ValueError:
         status_phrase = ""
 
-    logger.info(f"""{host}:{port} - "{request.method} {url}" {response.status_code} {status_phrase} {formatted_process_time}ms""")
+    api_logger.info(f"""{host}:{port} - "{request.method} {url}" {response.status_code} {status_phrase} {formatted_process_time}ms""")
 
     return response

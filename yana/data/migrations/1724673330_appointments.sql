@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS appointments (
     reason TEXT NOT NULL,
     location TEXT,
     user_id VARCHAR(36),
-    created_at INTEGER NOT NULL,
-    updated_at INTEGER NOT NULL,
+    created_at INTEGER,
+    updated_at INTEGER,
     FOREIGN KEY (user_id)
         REFERENCES users (id)
             ON DELETE CASCADE
