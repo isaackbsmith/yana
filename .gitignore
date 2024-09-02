@@ -3,6 +3,7 @@ logs/
 *.db
 .mighist
 *.pt
+tts_model.pt
 *.model
 scratch.py
 intent_model/
