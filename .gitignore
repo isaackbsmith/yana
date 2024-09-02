@@ -5,6 +5,11 @@ logs/
 *.pt
 *.model
 scratch.py
+intent_model/
+*.pkl
+*.bin
+*.zip
+*.wav
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

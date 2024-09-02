@@ -14,8 +14,9 @@ def download_from_torch_hub(url: str, file: Path, progress: bool = True) -> None
     returns:
         None
     """
+    file = file.resolve()
     if not file.is_file():
         print(f"Downloading {file} from torch hub")
-        torch.hub.download_url_to_file(url, str(file), progress=progress)
+        torch.hub.download_url_to_file(url, str(file.resolve()), progress=progress)
     else:
         print(f"{file} already exists. Skipping download")

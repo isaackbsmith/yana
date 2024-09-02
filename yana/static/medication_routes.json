@@ -1,0 +1,52 @@
+[
+	{
+		"name": "Oral",
+		"friendly_name": "By Mouth",
+		"description": "Medication is swallowed and absorbed through the digestive system"
+	},
+	{
+		"name": "Intravenous",
+		"friendly_name": "IV",
+		"description": "Medication is injected directly into a vein, entering the bloodstream immediately"
+	},
+	{
+		"name": "Sublingual",
+		"friendly_name": "Under the Tongue",
+		"description": "Medication is placed under the tongue to dissolve and be absorbed through the mouth's lining"
+	},
+	{
+		"name": "Buccal",
+		"friendly_name": "Between the Gums and Cheek",
+		"description": "Medication is placed between the gums and cheek to be absorbed through the mouth's lining"
+	},
+	{
+		"name": "Intramuscular",
+		"friendly_name": "Into the Muscle",
+		"description": "Medication is injected deep into a muscle for gradual absorption"
+	},
+	{
+		"name": "Subcutaneous",
+		"friendly_name": "Under the Skin",
+		"description": "Medication is injected into the layer of fat just beneath the skin"
+	},
+	{
+		"name": "Topical",
+		"friendly_name": "Applied to Skin",
+		"description": "Medication is applied directly to the skin's surface"
+	},
+	{
+		"name": "Inhalation",
+		"friendly_name": "Breathed In",
+		"description": "Medication is inhaled into the lungs, typically using an inhaler or nebulizer"
+	},
+	{
+		"name": "Rectal",
+		"friendly_name": "Inserted in the Rectum",
+		"description": "Medication is inserted into the rectum for local or systemic effect"
+	},
+	{
+		"name": "Transdermal",
+		"friendly_name": "Through the Skin",
+		"description": "Medication is absorbed slowly through the skin, often via a patch"
+	}
+]

@@ -1,2 +1,43 @@
+IR:
+    paths:
+        model: "yana/static/intents/intent_model"
+        intents: "yana/static/intents/intents.pkl"
+        embeddings: "yana/static/intents/intent_embeddings.pkl"
+        classifier: "yana/static/intents/intent_classifier.pkl"
+        data: "yana/static/intents/intents.json"
+
+TTS:
+    constants:
+        wav_channels: 1       # Mono
+        wav_header_size: 44   # Bytes
+        wav_sample_width: 2   # 16 / 8 (2 bytes)
+
+    params:
+        model_id: "v3_en"
+        language: "en"
+        put_accent: True
+        put_yo: True
+        speaker: "en_10"
+        sample_rate: 48000  # 48000, 24000, or 8000
+        line_len_limit: 800
+        device: "cpu"
+        num_threads: 4
+
+    urls:
+        config_uri:
+            "https://raw.githubusercontent.com/snakers4/silero-models/master/models.yml"
+        model_uri: "https://models.silero.ai/models/tts/en/v3_en.pt"
+
+    paths:
+        config: "yana/static/latest_silero_models.yml"
+        model: "yana/static/tts/tts_model.pt"
+
+STT:
+    paths:
+        vosk_model: "yana/static/stt/vosk-small.zip"
+        whisper_model: "yana/static/stt/whisper-base.bin"
+        user_audio: "yana/static/audio/user.wav"
+        whisper_binary: "yana/bin/whisper"
+
 database:
     path: "dev.db"

@@ -17,9 +17,9 @@ from yana.domain.types import YANAConfig
 from yana.domain.logger import api_logger
 
 
-async def fetch_medication(config: YANAConfig, name: str) -> MedicationModel | None:
+async def fetch_medication(config: YANAConfig, medication_id: str) -> MedicationModel | None:
     try:
-        result = await select_medication(config, name)
+        result = await select_medication(config, medication_id)
         if result and isinstance(result, MedicationSchema):
             medication = MedicationModel(**result.model_dump())
             return medication
