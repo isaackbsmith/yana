@@ -2,16 +2,16 @@
 
 -- Entity table
 CREATE TABLE IF NOT EXISTS appointments (
-    id VARCHAR(36) PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,
     reason TEXT NOT NULL,
     location TEXT,
-    user_id VARCHAR(36),
+    -- user_id VARCHAR(36),
     created_at INTEGER,
-    updated_at INTEGER,
-    FOREIGN KEY (user_id)
-        REFERENCES users (id)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE
+    updated_at INTEGER
+    -- FOREIGN KEY (user_id)
+    --     REFERENCES users (id)
+    --         ON DELETE CASCADE
+    --         ON UPDATE CASCADE
 ) WITHOUT ROWID;
 
 

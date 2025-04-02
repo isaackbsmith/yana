@@ -3,6 +3,7 @@ from yana.data.schemas.user import NewUserSchema, UserSchema
 from yana.domain.exceptions import DatabaseError, QueryError
 from yana.domain.types import YANAConfig
 
+
 async def select_user(config: YANAConfig, user_id: str):
     sql = """
         SELECT
@@ -17,13 +18,16 @@ async def select_user(config: YANAConfig, user_id: str):
         WHERE id = :id
     """
     try:
-        return await run_query(config=config,
-                                 sql=sql,
-                                 params={"id": user_id},
-                                 factory=UserSchema,
-                                 pragma="one")
+        return await run_query(
+            config=config,
+            sql=sql,
+            params={"id": user_id},
+            factory=UserSchema,
+            pragma="one",
+        )
     except DatabaseError:
         raise QueryError("Error selecting new user")
+
 
 async def insert_user(config: YANAConfig, user: NewUserSchema):
     sql = """
@@ -49,10 +53,8 @@ async def insert_user(config: YANAConfig, user: NewUserSchema):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params=user.model_dump(),
-            factory=UserSchema)
+            config=config, sql=sql, params=user.model_dump(), factory=UserSchema
+        )
     except DatabaseError:
         raise QueryError("Error inserting new user")
 
@@ -71,10 +73,8 @@ async def update_user(config: YANAConfig, user: UserSchema):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params=user.model_dump(),
-            factory=UserSchema)
+            config=config, sql=sql, params=user.model_dump(), factory=UserSchema
+        )
     except DatabaseError:
         raise QueryError("Error updating user")
 
@@ -85,9 +85,7 @@ async def delete_user(config: YANAConfig, user_id: str):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params={"id": user_id},
-            factory=UserSchema)
+            config=config, sql=sql, params={"id": user_id}, factory=UserSchema
+        )
     except DatabaseError:
         raise QueryError("Error deleting user")

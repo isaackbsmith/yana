@@ -1,0 +1,4 @@
+database:
+    path: "yana/test/ephemeral.db"
+    migrations: "yana/data/migrations/"
+    history: "yana/test/mig_hist.txt"

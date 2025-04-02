@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
 
-class AppointmentModel(BaseModel):
-    id: str
+class BaseAppointmentModel(BaseModel):
     reason: str
     location: str
-    user_id: str
+    # user_id: str
 
-class NewAppointmentModel(AppointmentModel):
+
+class FullAppointmentModel(BaseAppointmentModel):
     id: str

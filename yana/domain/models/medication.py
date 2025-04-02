@@ -15,6 +15,14 @@ class DosageFormModel(BaseModel):
     description: str
 
 
+class BaseMedicationModel(BaseModel):
+    generic_name: str
+    brand_name: str
+    description: str
+    strength: str
+    dosage: int
+
+
 class NewMedicationModel(BaseModel):
     generic_name: str
     brand_name: str
@@ -32,6 +40,5 @@ class MedicationModel(BaseModel):
     description: str
     strength: str
     dosage: int
-    dosage_form_id: int
-    medication_route_id: int
-
+    dosage_form: str
+    medication_route: str

@@ -2,7 +2,7 @@
 
 -- Entity table
 CREATE TABLE IF NOT EXISTS schedules_dows (
-    schedule_id VARCHAR(36),
+    schedule_id CHAR(36),
     day_of_week VARCHAR(3),
     created_at INTEGER,
     updated_at INTEGER,

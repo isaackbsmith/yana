@@ -2,13 +2,11 @@ import json
 import logging
 import logging.config
 from pathlib import Path
-from omegaconf import OmegaConf
-
-from yana.domain.types import YANAConfig
 
 
 BASE_PATH = Path.cwd()
 LOG_CONFIG_PATH = "yana/config/log_cfg.json"
+
 
 def setup_logger(name: str = "root", level: int = logging.INFO) -> logging.Logger:
     config_file = BASE_PATH / LOG_CONFIG_PATH
@@ -25,3 +23,4 @@ def setup_logger(name: str = "root", level: int = logging.INFO) -> logging.Logge
 
 root_logger = setup_logger("root")
 api_logger = setup_logger("api")
+reminder_logger = setup_logger("reminder")

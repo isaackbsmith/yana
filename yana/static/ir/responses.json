@@ -1,0 +1,187 @@
+{
+	"Check_Schedule": [
+		"Your next dose is at {time}.",
+		"You need to take your next pill at {time}.",
+		"The next medication is scheduled for {time}.",
+		"Your next pill time is {time}.",
+		"You should take your next dose at {time}."
+	],
+	"Log_Intake": [
+		"I've logged your dose for {time}.",
+		"Your medication for {time} has been recorded.",
+		"I’ve marked your {medication} as taken.",
+		"Your pill intake has been logged.",
+		"I’ve saved that you took your medication."
+	],
+	"Set_Reminder": [
+		"I’ve set a reminder for {time}.",
+		"Your reminder for {medication} at {time} is set.",
+		"Reminder set for {time}.",
+		"I'll remind you to take your medication at {time}.",
+		"Your {time} pill reminder has been scheduled."
+	],
+	"Modify_Reminder": [
+		"I’ve updated your reminder to {time}.",
+		"Your pill reminder is now set for {time}.",
+		"Reminder time changed to {time}.",
+		"I’ve moved your reminder to {time}.",
+		"The reminder has been adjusted to {time}."
+	],
+	"Cancel_Reminder": [
+		"I’ve canceled your reminder for {time}.",
+		"Your {medication} reminder at {time} has been canceled.",
+		"The reminder for {time} has been removed.",
+		"I've turned off your reminder for {time}.",
+		"The {time} reminder has been deleted."
+	],
+	"Check_History": [
+		"You took {medication} at {time} yesterday.",
+		"Your medication history shows {medication} taken at {time}.",
+		"You logged {medication} at {time} last week.",
+		"Your last dose was {medication} at {time}.",
+		"The record shows {medication} was taken at {time}."
+	],
+	"Request_Refill": [
+		"I’ve requested a refill for your {medication}.",
+		"Your prescription refill for {medication} is in process.",
+		"The refill request for {medication} has been made.",
+		"I’ve ordered more {medication} for you.",
+		"Refill request for {medication} has been sent."
+	],
+	"Add_Medication": [
+		"I’ve added {medication} to your schedule.",
+		"{medication} has been added to your list.",
+		"Your new medication {medication} is now tracked.",
+		"I’ve included {medication} in your routine.",
+		"{medication} has been successfully added."
+	],
+	"Remove_Medication": [
+		"I’ve removed {medication} from your list.",
+		"{medication} has been deleted from your schedule.",
+		"Your medication {medication} has been removed.",
+		"I’ve stopped tracking {medication}.",
+		"{medication} has been successfully removed."
+	],
+	"Get_Medication_Info": [
+		"{medication} is used for {condition}.",
+		"This medication, {medication}, treats {condition}.",
+		"{medication} is prescribed for {condition}.",
+		"{medication} helps with {condition}.",
+		"You take {medication} to manage {condition}."
+	],
+	"Update_Dosage": [
+		"I’ve updated your dosage to {dosage} per day.",
+		"Your dosage has been changed to {dosage}.",
+		"The dosage is now set to {dosage}.",
+		"I’ve adjusted your dosage to {dosage}.",
+		"Your new dosage is {dosage} per day."
+	],
+	"Skip_Dose": [
+		"I’ve logged that you skipped your dose for {time}.",
+		"Your {time} dose has been marked as skipped.",
+		"I’ve recorded that you missed your {time} pill.",
+		"Your skipped dose for {time} has been noted.",
+		"I’ve logged the skipped dose for {time}."
+	],
+	"Emergency_Assistance": [
+		"If you’ve taken too much {medication}, call emergency services immediately.",
+		"Contact your doctor or go to the nearest ER if you’ve overdosed on {medication}.",
+		"For an overdose, please call {emergency_number} immediately.",
+		"Seek immediate medical help if you suspect an overdose.",
+		"Call {emergency_number} right away if you’ve taken too much {medication}."
+	],
+	"Provide_Feedback": [
+		"Thank you for your feedback! I’ll pass it along.",
+		"I appreciate your input. Your feedback has been recorded.",
+		"Your feedback has been noted. Thank you!",
+		"Thank you for sharing your thoughts. I’ll make sure it’s considered.",
+		"I’ve saved your feedback. Thank you!",
+		"Thank you for your feedback, {user_name}! I’ll pass it along.",
+		"I appreciate your input, {user_title} {user_name}. Your feedback has been recorded.",
+		"Your feedback has been noted, {user_name}. Thank you!",
+		"Thank you for sharing your thoughts, {user_name}. I’ll make sure it’s considered.",
+		"I’ve saved your feedback, {user_name}. Thank you!"
+	],
+	"Ask_Side_Effects": [
+		"{medication} may cause side effects like {side_effect}.",
+		"Common side effects of {medication} include {side_effect}.",
+		"You might experience {side_effect} with {medication}.",
+		"{side_effect} is a potential side effect of {medication}.",
+		"Be aware of side effects such as {side_effect} when taking {medication}."
+	],
+	"First_Aid_Info": [
+		"For a burn, cool the area under running water for 10 minutes.",
+		"If someone is choking, perform the Heimlich maneuver.",
+		"For cuts, apply pressure to stop bleeding, then clean and bandage the wound.",
+		"If someone faints, lay them down and elevate their legs.",
+		"For a sprain, use the R.I.C.E method: Rest, Ice, Compression, Elevation."
+	],
+	"General_Small_Talk": [
+		"I'm doing well, thank you! How can I assist you today?",
+		"I’m here to help! What can I do for you?",
+		"Every day is a great day to stay healthy! Need any tips?",
+		"I’m just a virtual assistant, but I’m ready to help with your health needs.",
+		"I’m always here to help with your medication or health questions.",
+		"I'm doing well, {user_title} {user_name}, thank you! How can I assist you today?",
+		"I’m here to help, {user_name}! What can I do for you?",
+		"Every day is a great day to stay healthy, {user_title} {user_name}! Need any tips?",
+		"I’m just a virtual assistant, but I’m ready to help with your health needs, {user_name}.",
+		"I’m always here to help with your medication or health questions, {user_name}."
+	],
+	"Symptoms_Check": [
+		"A headache could be caused by stress or dehydration. Try resting and drinking water.",
+		"Dizziness might indicate low blood pressure. If it persists, consult a doctor.",
+		"A fever could be a sign of infection. Monitor your temperature and rest.",
+		"If you feel nauseous, try sipping ginger tea or lying down.",
+		"A sore throat might be due to a cold. Gargle with salt water and stay hydrated."
+	],
+	"Healthy_Lifestyle_Tips": [
+		"Try to include more fruits and vegetables in your diet.",
+		"Regular exercise, like walking, can boost your overall health.",
+		"Drinking plenty of water helps keep you hydrated and healthy.",
+		"Getting enough sleep is crucial for maintaining good health.",
+		"Managing stress through meditation or yoga can improve your wellbeing."
+	],
+	"Medication_Interactions": [
+		"{medication1} may interact with {medication2}. Consult your doctor before combining them.",
+		"It's not recommended to take {medication1} with {medication2} without medical advice.",
+		"{medication1} and {medication2} might cause side effects if taken together.",
+		"Check with your pharmacist before mixing {medication1} and {medication2}.",
+		"Combining {medication1} and {medication2} may require dosage adjustments."
+	],
+	"Locate_Nearest_Pharmacy": [
+		"The nearest pharmacy is at {location}.",
+		"You can find a pharmacy nearby at {location}.",
+		"There’s a pharmacy at {location} close to you.",
+		"The closest pharmacy is located at {location}.",
+		"You can go to the pharmacy at {location}."
+	],
+	"Emergency_Contact": [
+		"Your emergency contact is {contact_name}, at {contact_number}.",
+		"I've set {contact_name} as your emergency contact.",
+		"You can reach your emergency contact, {contact_name}, at {contact_number}.",
+		"Your emergency contact {contact_name} is noted.",
+		"In case of emergency, contact {contact_name} at {contact_number}."
+	],
+	"Daily_Health_Check": [
+		"I've logged your blood pressure at {value} today.",
+		"Your weight has been recorded as {value}.",
+		"I’ve saved your mood today as {mood}.",
+		"Your daily health stat has been logged.",
+		"I’ve noted your health check for today."
+	],
+	"Medical_Appointment": [
+		"Your appointment with {doctor_name} is scheduled for {date} at {time}.",
+		"I’ve set a reminder for your appointment on {date}.",
+		"You have an appointment with {doctor_name} at {location} on {date}.",
+		"I’ve noted your upcoming appointment for {date}.",
+		"Your appointment has been scheduled for {date}."
+	],
+	"General_Wellbeing_Check": [
+		"You seem to be in good health based on your recent data.",
+		"Your recent health metrics look positive!",
+		"Based on your latest inputs, you’re doing well.",
+		"Your health data indicates you're maintaining a good state.",
+		"Everything seems fine with your recent wellbeing check."
+	]
+}

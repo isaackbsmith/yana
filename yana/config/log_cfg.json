@@ -51,6 +51,14 @@
 			"filename": "yana/logs/yana_api.jsonl",
 			"maxBytes": 10000,
 			"backupCount": 3
+		},
+		"reminder_file": {
+			"class": "logging.handlers.RotatingFileHandler",
+			"level": "DEBUG",
+			"formatter": "json",
+			"filename": "yana/logs/yana_reminder.jsonl",
+			"maxBytes": 10000,
+			"backupCount": 3
 		}
 	},
 	"loggers": {
@@ -68,6 +76,14 @@
 				"stdout",
 				"stderr",
 				"api_file"
+			]
+		},
+		"reminder": {
+			"level": "DEBUG",
+			"handlers": [
+				"stdout",
+				"stderr",
+				"reminder_file"
 			]
 		}
 	}
