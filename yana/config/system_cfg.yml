@@ -1,12 +1,12 @@
-IR:
+intent_recognizer:
     paths:
-        model: "yana/static/intents/intent_model"
-        intents: "yana/static/intents/intents.pkl"
-        embeddings: "yana/static/intents/intent_embeddings.pkl"
-        classifier: "yana/static/intents/intent_classifier.pkl"
-        data: "yana/static/intents/intents.json"
+        model: "yana/static/ir/intent_model"
+        intents: "yana/static/ir/intents.pkl"
+        embeddings: "yana/static/ir/intent_embeddings.pkl"
+        classifier: "yana/static/ir/intent_classifier.pkl"
+        data: "yana/static/ir/intents.json"
 
-TTS:
+speech_synthesizer:
     constants:
         wav_channels: 1       # Mono
         wav_header_size: 44   # Bytes
@@ -32,12 +32,29 @@ TTS:
         config: "yana/static/latest_silero_models.yml"
         model: "yana/static/tts/tts_model.pt"
 
-STT:
+speech_recognizer:
     paths:
-        vosk_model: "yana/static/stt/vosk-small.zip"
-        whisper_model: "yana/static/stt/whisper-base.bin"
         user_audio: "yana/static/audio/user.wav"
+        vosk_model: "yana/static/stt/vosk-small"
+        whisper_model: "yana/static/stt/whisper-base.bin"
         whisper_binary: "yana/bin/whisper"
+
+speech_listener:
+    params:
+        sample_rate: 16000
+    paths:
+        user_audio: "yana/static/audio/user.wav"
+
+interaction:
+    paths:
+        intents: "yana/static/ir/intents.json"
+        follow_ups: "yana/static/ir/follow_ups.json"
+        responses: "yana/static/ir/responses.json"
+
+entity_recognizer:
+    paths:
+        model: "yana/static/ner/ner_model"
+        tokenizer: "yana/static/ner/ner_tokenizer"
 
 database:
     path: "dev.db"

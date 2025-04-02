@@ -13,5 +13,3 @@ class UserSchema(BaseModel):
 
 class NewUserSchema(UserSchema):
     password: str
-
-

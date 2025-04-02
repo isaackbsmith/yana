@@ -1,5 +1,10 @@
 from yana.data.database import run_query
-from yana.data.schemas.medication import DosageFormSchema, MedicationRouteSchema, MedicationSchema
+from yana.data.schemas.medication import (
+    DosageFormSchema,
+    MedicationRouteSchema,
+    MedicationSchema,
+    NewMedicationSchema,
+)
 from yana.domain.exceptions import DatabaseError, QueryError
 from yana.domain.types import YANAConfig
 
@@ -7,28 +12,57 @@ from yana.domain.types import YANAConfig
 async def select_medication(config: YANAConfig, medication_id: str):
     sql = """
         SELECT
-            id,
-            generic_name,
-            brand_name,
-            description,
-            strength,
-            dosage,
-            dosage_form_id,
-            medication_route_id
-        FROM medications
-        WHERE id = :id;
+            med.id,
+            med.generic_name,
+            med.brand_name,
+            med.description,
+            med.strength,
+            med.dosage,
+            dosage.name AS dosage_form,
+            route.name AS medication_route
+        FROM medications AS med
+        INNER JOIN dosage_forms AS dosage ON med.dosage_form_id = dosage.id
+        INNER JOIN medication_routes AS route ON med.medication_route_id = route.id
+        WHERE med.id = :id;
     """
     try:
-        return await run_query(config=config,
-                                 sql=sql,
-                                 params={"id": medication_id},
-                                 factory=MedicationSchema,
-                                 pragma="one")
+        return await run_query(
+            config=config,
+            sql=sql,
+            params={"id": medication_id},
+            factory=MedicationSchema,
+            pragma="one",
+        )
     except DatabaseError:
         raise QueryError("Error selecting new medication")
 
+async def select_all_medications(config: YANAConfig):
+    sql = """
+        SELECT
+            med.id,
+            med.generic_name,
+            med.brand_name,
+            med.description,
+            med.strength,
+            med.dosage,
+            dosage.name AS dosage_form,
+            route.name AS medication_route
+        FROM medications AS med
+        INNER JOIN dosage_forms AS dosage ON med.dosage_form_id = dosage.id
+        INNER JOIN medication_routes AS route ON med.medication_route_id = route.id
+        ORDER BY brand_name
+    """
+    try:
+        return await run_query(
+            config=config,
+            sql=sql,
+            factory=MedicationSchema,
+            pragma="all",
+        )
+    except DatabaseError:
+        raise QueryError("Error selecting medications")
 
-async def insert_medication(config: YANAConfig, user: MedicationSchema):
+async def insert_medication(config: YANAConfig, user: NewMedicationSchema):
     sql = """
         INSERT INTO medications (
             id,
@@ -52,15 +86,13 @@ async def insert_medication(config: YANAConfig, user: MedicationSchema):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params=user.model_dump(),
-            factory=MedicationSchema)
+            config=config, sql=sql, params=user.model_dump(), factory=MedicationSchema
+        )
     except DatabaseError:
         raise QueryError("Error inserting new medication")
 
 
-async def update_medication(config: YANAConfig, user: MedicationSchema):
+async def update_medication(config: YANAConfig, user: NewMedicationSchema):
     sql = """
         UPDATE medications
         SET
@@ -75,10 +107,8 @@ async def update_medication(config: YANAConfig, user: MedicationSchema):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params=user.model_dump(),
-            factory=MedicationSchema)
+            config=config, sql=sql, params=user.model_dump(), factory=MedicationSchema
+        )
     except DatabaseError:
         raise QueryError("Error updating medication")
 
@@ -89,10 +119,8 @@ async def delete_medication(config: YANAConfig, id: str):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params={"id": id},
-            factory=MedicationSchema)
+            config=config, sql=sql, params={"id": id}, factory=MedicationSchema
+        )
     except DatabaseError:
         raise QueryError("Error deleting medication")
 
@@ -116,7 +144,8 @@ async def insert_medication_route(config: YANAConfig, route: MedicationRouteSche
             config=config,
             sql=sql,
             params=route.model_dump(),
-            factory=MedicationRouteSchema)
+            factory=MedicationRouteSchema,
+        )
     except DatabaseError:
         raise QueryError("Error inserting new medication route")
 
@@ -137,7 +166,8 @@ async def select_medication_route(config: YANAConfig, route_id: int):
             sql=sql,
             params={"id": route_id},
             pragma="one",
-            factory=MedicationRouteSchema)
+            factory=MedicationRouteSchema,
+        )
     except DatabaseError:
         raise QueryError("Error retrieving medication route")
 
@@ -155,9 +185,9 @@ async def select_medication_routes(config: YANAConfig):
         return await run_query(
             config=config,
             sql=sql,
-            params=None,
             pragma="all",
-            factory=MedicationRouteSchema)
+            factory=MedicationRouteSchema,
+        )
     except DatabaseError:
         raise QueryError("Error retrieving medication routes")
 
@@ -178,10 +208,8 @@ async def insert_dosage_forms(config: YANAConfig, route: DosageFormSchema):
         """
     try:
         return await run_query(
-            config=config,
-            sql=sql,
-            params=route.model_dump(),
-            factory=DosageFormSchema)
+            config=config, sql=sql, params=route.model_dump(), factory=DosageFormSchema
+        )
     except DatabaseError:
         raise QueryError("Error inserting new dosage form")
 
@@ -202,7 +230,8 @@ async def select_dosage_form(config: YANAConfig, form_id: int):
             sql=sql,
             params={"id": form_id},
             pragma="one",
-            factory=DosageFormSchema)
+            factory=DosageFormSchema,
+        )
     except DatabaseError:
         raise QueryError("Error retrieving dosage form")
 
@@ -220,9 +249,8 @@ async def select_dosage_forms(config: YANAConfig):
         return await run_query(
             config=config,
             sql=sql,
-            params=None,
             pragma="all",
-            factory=DosageFormSchema)
+            factory=DosageFormSchema
+        )
     except DatabaseError:
         raise QueryError("Error retrieving dosage forms")
-

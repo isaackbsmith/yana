@@ -3,21 +3,34 @@ import uuid
 from yana.data.queries.medications import (
     delete_medication,
     insert_medication,
+    select_all_medications,
     select_dosage_form,
     select_dosage_forms,
     select_medication,
     select_medication_route,
     select_medication_routes,
-    update_medication
+    update_medication,
 )
-from yana.data.schemas.medication import DosageFormSchema, MedicationRouteSchema, MedicationSchema
+from yana.data.schemas.medication import (
+    DosageFormSchema,
+    MedicationRouteSchema,
+    MedicationSchema,
+    NewMedicationSchema,
+)
 from yana.domain.exceptions import QueryError, ServiceError
-from yana.domain.models.medication import DosageFormModel, MedicationModel, MedicationRouteModel, NewMedicationModel
+from yana.domain.models.medication import (
+    DosageFormModel,
+    MedicationModel,
+    MedicationRouteModel,
+    NewMedicationModel,
+)
 from yana.domain.types import YANAConfig
 from yana.domain.logger import api_logger
 
 
-async def fetch_medication(config: YANAConfig, medication_id: str) -> MedicationModel | None:
+async def fetch_medication(
+    config: YANAConfig, medication_id: str
+) -> MedicationModel | None:
     try:
         result = await select_medication(config, medication_id)
         if result and isinstance(result, MedicationSchema):
@@ -29,29 +42,42 @@ async def fetch_medication(config: YANAConfig, medication_id: str) -> Medication
         raise ServiceError("Medication Service Error")
 
 
-async def create_medication(config: YANAConfig, medication: NewMedicationModel) -> None:
+async def fetch_all_medications(config: YANAConfig):
+    try:
+        result = await select_all_medications(config)
+        if result and isinstance(result, list) and len(result) > 0:
+            medications = list(
+                map(lambda x: MedicationModel(**x.model_dump()), result)
+            )
+            return medications
+        return []
+    except QueryError:
+        api_logger.error("An error occurred fetching medications")
+        raise ServiceError("Medication Service Error")
 
+async def create_medication(config: YANAConfig, medication: NewMedicationModel) -> MedicationModel:
     id = str(uuid.uuid4())
-
-    new_medication = MedicationSchema(**medication.model_dump(), id=id)
+    new_medication = NewMedicationSchema(**medication.model_dump(), id=id)
 
     try:
         await insert_medication(config, new_medication)
+        return cast(MedicationModel, await fetch_medication(config, id))
     except QueryError:
         api_logger.error("An error occurred creating medication")
         raise ServiceError("Medication Service Error")
 
 
-async def modify_medication(config: YANAConfig, medication: MedicationModel) -> MedicationModel:
-
-    updated_medication = MedicationSchema(**medication.model_dump())
+async def modify_medication(
+    config: YANAConfig, medication: NewMedicationModel, medication_id: str
+) -> MedicationModel:
+    updated_medication = NewMedicationSchema(**medication.model_dump(), id=medication_id)
 
     try:
         await update_medication(config, updated_medication)
         return cast(MedicationModel, await fetch_medication(config, updated_medication.id))
     except QueryError:
         api_logger.error("An error occurred updating medication")
-        raise ServiceError("Medication Service Error")
+        raise ServiceError("Medication Service Eror")
 
 
 async def remove_medication(config: YANAConfig, id: str) -> None:
@@ -62,10 +88,11 @@ async def remove_medication(config: YANAConfig, id: str) -> None:
         raise ServiceError("Medication Service Error")
 
 
-async def fetch_medication_route(config: YANAConfig, route_id: int) -> MedicationRouteModel | None:
+async def fetch_medication_route(
+    config: YANAConfig, route_id: int
+) -> MedicationRouteModel | None:
     try:
         result = await select_medication_route(config, route_id)
-        print(result)
         if result and isinstance(result, MedicationRouteSchema):
             medication_route = MedicationRouteModel(**result.model_dump())
             return medication_route
@@ -79,7 +106,9 @@ async def fetch_medication_routes(config: YANAConfig):
     try:
         result = await select_medication_routes(config)
         if result and isinstance(result, list) and len(result) > 0:
-            medication_routes = list(map(lambda x: MedicationRouteModel(**x.model_dump()), result))
+            medication_routes = list(
+                map(lambda x: MedicationRouteModel(**x.model_dump()), result)
+            )
             return medication_routes
         return []
     except QueryError:
@@ -103,7 +132,9 @@ async def fetch_dosage_forms(config: YANAConfig) -> list[DosageFormModel] | list
     try:
         result = await select_dosage_forms(config)
         if result and isinstance(result, list) and len(result) > 0:
-            dosage_forms = list(map(lambda x: MedicationRouteModel(**x.model_dump()), result))
+            dosage_forms = list(
+                map(lambda x: MedicationRouteModel(**x.model_dump()), result)
+            )
             return dosage_forms
         return []
     except QueryError:

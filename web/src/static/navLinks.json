@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Dashboard",
+    "icon": "home-outline",
+    "link": ""
+  },
+  {
+    "name": "Assistant",
+    "icon": "chatbubbles-outline",
+    "link": ""
+  },
+  {
+    "name": "Medications",
+    "icon": "medkit-outline",
+    "link": ""
+  },
+  {
+    "name": "Appointments",
+    "icon": "location-outline",
+    "link": ""
+  },
+  {
+    "name": "Schedules",
+    "icon": "calendar-outline",
+    "link": ""
+  },
+  {
+    "name": "Adherence",
+    "icon": "analytics-outline",
+    "link": ""
+  },
+  {
+    "name": "FAQ",
+    "icon": "help-circle-outline",
+    "link": ""
+  },
+  {
+    "name": "Settings",
+    "icon": "settings-outline",
+    "link": ""
+  }
+]

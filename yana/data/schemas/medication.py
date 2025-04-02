@@ -14,14 +14,18 @@ class DosageFormSchema(BaseModel):
     friendly_name: str
     description: str
 
-
-class MedicationSchema(BaseModel):
+class BaseMedicationSchema(BaseModel):
     id: str
     generic_name: str
     brand_name: str
     description: str
     strength: str
     dosage: int
+
+class NewMedicationSchema(BaseMedicationSchema):
     dosage_form_id: int
     medication_route_id: int
 
+class MedicationSchema(BaseMedicationSchema):
+    dosage_form: str
+    medication_route: str

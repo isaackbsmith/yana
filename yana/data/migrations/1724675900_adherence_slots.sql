@@ -2,24 +2,24 @@
 
 -- Entity table
 CREATE TABLE IF NOT EXISTS adherence_slots (
-    id VARCHAR(36) PRIMARY KEY,
-    date INTEGER NOT NULL,
-    time INTEGER NOT NULL,
+    id CHAR(36) PRIMARY KEY,
+    datetime INTEGER NOT NULL,
+    adherence_time INTEGER,
     adherence_status VARCHAR(255) CHECK (adherence_status IN (
         'fully_adherent',
         'partially_adherent',
         'not_adherent',
         'temporarily_exempt',
         'not_relevant'
-    )),
-    adherence_time INTEGER NOT NULL,
+    ) OR adherence_status IS NULL),
     reminder_status VARCHAR(255) CHECK (reminder_status IN (
         'pending',
         'sent',
         'acknowledged',
         'overdue',
         'completed'
-    )),
+    ) OR reminder_status IS NULL),
+    rep_count INTEGER DEFAULT 0, -- Track the amount of repetitions
     non_adherence_reason TEXT,
     notes TEXT,
     schedule_id VARCHAR(36),

@@ -3,7 +3,6 @@ import textwrap
 import argparse
 import sqlite3
 import tempfile
-import argparse
 from pathlib import Path
 
 from yana.data.database import DB
@@ -22,7 +21,7 @@ def create_migration_file(args: argparse.Namespace, migration_file: Path) -> Non
     """
     prefix = f"-- {args.name} Generated on {datetime.datetime.now()}\n\n"
     template = textwrap.dedent(
-                f"""
+        f"""
                 -- Entity table
                 CREATE TABLE IF NOT EXISTS {args.name} (
                     id VARCHAR(36) PRIMARY KEY,
@@ -49,7 +48,8 @@ def create_migration_file(args: argparse.Namespace, migration_file: Path) -> Non
                     SET updated_at = strftime('%s', 'now')
                     WHERE id = NEW.id;
                 END;
-            \n""").strip()
+            \n"""
+    ).strip()
 
     if args.create:
         with migration_file.open(mode="a") as migration_f:
@@ -85,7 +85,7 @@ def fetch_all_migrations(migrations_dir: Path) -> list[Path]:
     """
     if not migrations_dir.exists():
         print("Path does not exist")
-        raise FileNotFoundError(f"Path does not exist")
+        raise FileNotFoundError(f"Path {migrations_dir} does not exist")
 
     if migrations_dir.is_file():
         raise NotADirectoryError(f"{migrations_dir} is not a directory")
@@ -146,11 +146,7 @@ def validate_migration(migrations_dir: Path) -> bool:
     migration_files = fetch_all_migrations(migrations_dir)
 
     # create a tmp db
-    with tempfile.NamedTemporaryFile(
-        mode="w+", 
-        suffix=".db",
-        dir=".") as tmp_db:
-
+    with tempfile.NamedTemporaryFile(mode="w+", suffix=".db", dir=".") as tmp_db:
         db_path = Path(tmp_db.name)
 
         try:
@@ -225,16 +221,24 @@ def main() -> None:
     sub_parsers = parser.add_subparsers(dest="command", help="For sub-commands")
 
     # Make migrations
-    makemigration_parser = sub_parsers.add_parser("makemigration", help="Create a new migration file")
-    makemigration_parser.add_argument("-c", "--create", action="store_true", help="Create Entity")
+    makemigration_parser = sub_parsers.add_parser(
+        "makemigration", help="Create a new migration file"
+    )
+    makemigration_parser.add_argument(
+        "-c", "--create", action="store_true", help="Create Entity"
+    )
     makemigration_parser.add_argument("-n", "--name", type=str, help="Migration name")
 
     # Mmigrate
     migrate_parser = sub_parsers.add_parser("migrate", help="Apply migrations")
-    migrate_parser.add_argument("-t", "--target", type=str, default="dev.db", help="Taget datastore")
+    migrate_parser.add_argument(
+        "-t", "--target", type=str, default="dev.db", help="Taget datastore"
+    )
 
     # Validate migration
-    validatemigration_parser = sub_parsers.add_parser("validatemigration", help="Validate migration")
+    validatemigration_parser = sub_parsers.add_parser(
+        "validatemigration", help="Validate migration"
+    )
 
     args = parser.parse_args()
 
@@ -247,7 +251,10 @@ def main() -> None:
             if not args.name:
                 print("Migration file name is missing")
                 raise SystemExit()
-            migration_file = MIGRATIONS_DIR / f"{int(datetime.datetime.now().timestamp())}_{args.name}.sql"
+            migration_file = (
+                MIGRATIONS_DIR
+                / f"{int(datetime.datetime.now().timestamp())}_{args.name}.sql"
+            )
             print(f"Creating migration file {migration_file}")
             create_migration_file(args, migration_file)
         elif args.command == "migrate":
@@ -264,4 +271,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

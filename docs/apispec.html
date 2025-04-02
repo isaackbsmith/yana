@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>API Documentation - YANA</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			line-height: 1.6;
+			margin: 0;
+			padding: 0;
+			background-color: #f4f4f4;
+		}
+
+		header {
+			background: #333;
+			color: #fff;
+			padding: 10px 0;
+			text-align: center;
+		}
+
+		.container {
+			width: 80%;
+			margin: auto;
+			overflow: hidden;
+			padding: 20px;
+		}
+
+		h1,
+		h2,
+		h3 {
+			color: #333;
+		}
+
+		.endpoint,
+		.model {
+			background: #fff;
+			border: 1px solid #ddd;
+			margin-bottom: 10px;
+			padding: 15px;
+			border-radius: 5px;
+		}
+
+		.method {
+			font-weight: bold;
+			color: #007bff;
+		}
+
+		.description {
+			margin-bottom: 10px;
+		}
+
+		.request,
+		.response {
+			background: #f9f9f9;
+			padding: 10px;
+			border-left: 4px solid #007bff;
+			border-radius: 3px;
+			margin-bottom: 10px;
+		}
+
+		.title {
+			font-weight: bold;
+			margin-bottom: 5px;
+		}
+
+		.code {
+			font-family: monospace;
+			white-space: pre-wrap;
+			background: #eee;
+			padding: 5px;
+			border-radius: 3px;
+			overflow-x: auto;
+		}
+
+		.model .title {
+			color: #007bff;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1>API Documentation - YANA</h1>
+	</header>
+	<div class="container">
+		<section>
+			<h2>Endpoints</h2>
+
+			<div class="endpoint">
+				<h3>/users/</h3>
+				<p class="method">GET</p>
+				<p class="description">Home</p>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">string</div>
+				</div>
+			</div>
+
+			<div class="endpoint">
+				<h3>/users/new</h3>
+				<p class="method">POST</p>
+				<p class="description">New User</p>
+				<div class="request">
+					<div class="title">Request Body:</div>
+					<div class="code">{
+						"first_name": "string",
+						"last_name": "string",
+						"email": "string",
+						"phone_number": "string",
+						"gender": "string",
+						"user_type": "string",
+						"password": "string"
+						}</div>
+				</div>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">{} (empty)</div>
+				</div>
+				<div class="response">
+					<div class="title">Error Response:</div>
+					<div class="code">{
+						"detail": [
+						{
+						"loc": ["string", "integer"],
+						"msg": "string",
+						"type": "string"
+						}
+						]
+						}</div>
+				</div>
+			</div>
+
+			<div class="endpoint">
+				<h3>/users/{user_id}</h3>
+				<p class="method">GET</p>
+				<p class="description">Get User</p>
+				<div class="request">
+					<div class="title">Path Parameter:</div>
+					<div class="code">{
+						"user_id": "string"
+						}</div>
+				</div>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">{
+						"first_name": "string",
+						"last_name": "string",
+						"email": "string",
+						"phone_number": "string",
+						"gender": "string",
+						"user_type": "string",
+						"id": "string"
+						}</div>
+				</div>
+			</div>
+
+			<!-- Additional endpoints can be added similarly -->
+
+		</section>
+		<section>
+			<h2>Medications</h2>
+
+			<div class="endpoint">
+				<h3>/medications/</h3>
+				<p class="method">GET</p>
+				<p class="description">Home</p>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">string</div>
+				</div>
+			</div>
+
+			<div class="endpoint">
+				<h3>/medications/routes</h3>
+				<p class="method">GET</p>
+				<p class="description">Get Medication Routes</p>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">[
+						{
+						"id": "integer",
+						"name": "string",
+						"friendly_name": "string",
+						"description": "string"
+						}
+						]</div>
+				</div>
+			</div>
+
+			<!-- Additional endpoints can be added similarly -->
+
+		</section>
+		<section>
+			<h2>Schedules</h2>
+
+			<div class="endpoint">
+				<h3>/schedules/</h3>
+				<p class="method">GET</p>
+				<p class="description">Home</p>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">string</div>
+				</div>
+			</div>
+
+			<div class="endpoint">
+				<h3>/schedules/new</h3>
+				<p class="method">POST</p>
+				<p class="description">New Schedule</p>
+				<div class="request">
+					<div class="title">Request Body:</div>
+					<div class="code">{
+						"begin_date": "date-time",
+						"end_date": "date-time",
+						"begin_time": "date-time",
+						"end_time": "date-time or null",
+						"schedule_type": "string",
+						"user_id": "string",
+						"medication_id": "string or null",
+						"appointment_id": "string or null",
+						"repeated": "string or null",
+						"repetition_step": "integer",
+						"repeated_until": "string or null",
+						"repeated_monthly_on": "string or null",
+						"repeated_until_date": "date-time or null",
+						"repeated_reps": "integer or null",
+						"days_of_week": [
+						"string"
+						]
+						}</div>
+				</div>
+				<div class="response">
+					<div class="title">Response:</div>
+					<div class="code">{} (empty)</div>
+				</div>
+				<div class="response">
+					<div class="title">Error Response:</div>
+					<div class="code">{
+						"detail": [
+						{
+						"loc": ["string", "integer"],
+						"msg": "string",
+						"type": "string"
+						}
+						]
+						}</div>
+				</div>
+			</div>
+
+			<!-- Additional endpoints can be added similarly -->
+
+		</section>
+		<section>
+			<h2>Models</h2>
+
+			<div class="model">
+				<h3>Body_post_form__post</h3>
+				<div class="description">Model for the POST form body.</div>
+				<div class="code">{
+					"num": "integer"
+					}</div>
+			</div>
+
+			<div class="model">
+				<h3>DosageFormModel</h3>
+				<div class="description">Model representing a dosage form.</div>
+				<div class="code">{
+					"id": "integer",
+					"name": "string",
+					"friendly_name": "string",
+					"description": "string"
+					}</div>
+			</div>
+
+			<div class="model">
+				<h3>MedicationModel</h3>
+				<div class="description">Model representing a medication.</div>
+				<div class="code">{
+					"id": "string",
+					"generic_name": "string",
+					"brand_name": "string",
+					"description": "string",
+					"strength": "string",
+					"dosage": "integer",
+					"dosage_form_id": "integer",
+					"medication_route_id": "integer"
+					}</div>
+			</div>
+
+			<div class="model">
+				<h3>NewMedicationModel</h3>
+				<div class="description">Model for creating a new medication.</div>
+				<div class="code">{
+					"generic_name": "string",
+					"brand_name": "string",
+					"description": "string",
+					"strength": "string",
+					"dosage": "integer",
+					"dosage_form_id": "integer",
+					"medication_route_id": "integer"
+					}</div>
+			</div>
+
+			<div class="model">
+				<h3>NewScheduleModel</h3>
+				<div class="description">Model for creating a new schedule.</div>
+				<div class="code">{
+					"begin_date": "date-time",
+					"end_date": "date-time",
+					"begin_time": "date-time",
+					"end_time": "date-time or null",
+					"schedule_type": "string",
+					"user_id": "string",
+					"medication_id": "string or null",
+					"appointment_id": "string or null",
+					"repeated": "string or null",
+					"repetition_step": "integer",
+					"repeated_until": "string or null",
+					"repeated_monthly_on": "string or null",
+					"repeated_until_date": "date-time or null",
+					"repeated_reps": "integer or null",
+					"days_of_week": [
+					"string"
+					]
+					}</div>
+			</div>
+
+			<!-- Additional models can be added similarly -->
+
+		</section>
+	</div>
+</body>
+
+</html>

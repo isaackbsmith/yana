@@ -6,6 +6,8 @@ logs/
 *.model
 scratch.py
 intent_model/
+ner_model/
+ner_tokenizer/
 *.pkl
 *.bin
 *.zip

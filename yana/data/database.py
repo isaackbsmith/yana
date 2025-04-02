@@ -14,9 +14,7 @@ RowFactory = Callable[[sqlite3.Cursor, tuple], T]
 
 
 class DB:
-    def __init__(self,
-                 db_path: Path,
-                 row_factory: RowFactory) -> None:
+    def __init__(self, db_path: Path, row_factory: RowFactory) -> None:
         self.db_path = db_path
         self.row_factory = row_factory
 
@@ -33,18 +31,20 @@ class DB:
 def get_row_factory(factory: type[T]) -> RowFactory:
     def row_factory(cursor: sqlite3.Cursor, row: tuple) -> T:
         columns = [column[0] for column in cursor.description]
+        # print("Factory: ======> ", dict(zip(columns, row)))
         return factory(**dict(zip(columns, row)))
+
     return row_factory
 
 
 async def run_query(
     config: YANAConfig,
     sql: str,
-    params: dict[str, Any] | None,
     factory: type[T],
-    pragma: Literal["one", "all","many"] | None = None,
-    limit: int = 1) -> list[T] | T | None:
-
+    params: dict[str, Any] | None = None,
+    pragma: Literal["one", "all", "many"] | None = None,
+    limit: int = 1,
+) -> list[T] | T | None:
     db_path = Path(config.database.path).resolve()
     row_factory = get_row_factory(factory)
 
@@ -60,13 +60,11 @@ async def run_query(
                 return None
 
             if pragma == "one":
-                result = cursor.fetchone()
+                return cursor.fetchone()
             elif pragma == "many":
-                result = cursor.fetchmany(limit)
+                return cursor.fetchmany(limit)
             else:
-                result = cursor.fetchall()
-
-            return result
+                return cursor.fetchall()
         except sqlite3.Error as e:
             root_logger.error(f"Error executing query: {e}")
             raise DatabaseError(str(e))

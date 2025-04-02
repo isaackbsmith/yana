@@ -1,0 +1,177 @@
+{
+	"G1": [
+		"Is there anything else I can help you with?",
+		"Do you need assistance with anything else?",
+		"Can I help you with something more?",
+		"Is there another question you have?",
+		"Would you like to know anything else?",
+		"Do you have any other requests?",
+		"Is there anything else you need help with?",
+		"Can I assist you with anything further?",
+		"How else can I assist you today?",
+		"Do you have any more questions?",
+		"Would you like to ask me anything else?",
+		"Can I provide more help?"
+	],
+	"R1": [
+		"Okay, let's hear it",
+		"Alright, what do you need?"
+	],
+	"E0": [
+		"Have a great day!",
+		"If you need more help, feel free to ask.",
+		"Goodbye, and take care!",
+		"If you have any more questions, just let me know.",
+		"It was a pleasure assisting you.",
+		"See you next time!",
+		"Have a wonderful day!",
+		"Feel free to reach out again if you need anything.",
+		"I hope I was able to help.",
+		"Take care and have a great day!",
+		"Goodbye, and stay well!"
+	],
+	"Check_Schedule": [
+		"Would you like to set a reminder for your next dose?",
+		"Do you need help with your medication schedule?",
+		"Is there anything else related to your schedule you need assistance with?",
+		"Would you like me to help you with setting up medication reminders?"
+	],
+	"Add_Medication": [
+		"Do you need to add any more medications?",
+		"Would you like help with setting reminders for this new medication?",
+		"Is there anything else you’d like to do with your medication list?",
+		"Do you need any additional assistance with your medication?"
+	],
+	"Remove_Medication": [
+		"Do you need to remove any other medications?",
+		"Would you like help with updating your medication list?",
+		"Is there anything else you want to adjust with your medications?",
+		"Do you need further assistance with managing your medications?"
+	],
+	"Get_Medication_Info": [
+		"Would you like more details on other medications?",
+		"Is there anything else you want to know about your meds?",
+		"Do you need information on a different medication?",
+		"Can I assist you with anything else related to your medications?"
+	],
+	"Update_Dosage": [
+		"Do you need to adjust the dosage for any other medications?",
+		"Would you like help with updating other medication details?",
+		"Is there anything else you need assistance with regarding dosage?",
+		"Do you need any additional changes made to your medication plan?"
+	],
+	"Skip_Dose": [
+		"Would you like to log any other missed doses?",
+		"Is there anything else you need to adjust regarding your doses?",
+		"Do you need help with tracking skipped doses?",
+		"Can I assist you with anything else related to your medication schedule?"
+	],
+	"Add_Medical_Appointment": [
+		"Do you need to schedule any more appointments?",
+		"Would you like to set reminders for your medical visits?",
+		"Is there anything else you need help with regarding appointments?",
+		"Do you need further assistance with your medical scheduling?"
+	],
+	"Remove_Medical_Appointment": [
+		"Do you need to cancel any other appointments?",
+		"Would you like help with rescheduling your visits?",
+		"Is there anything else you need to adjust with your appointments?",
+		"Can I assist you with any other changes to your medical schedule?"
+	],
+	"Get_Medical_Appointment_Info": [
+		"Would you like details on any other upcoming appointments?",
+		"Is there anything else you need to know about your medical visits?",
+		"Do you need information on a different appointment?",
+		"Can I assist you with anything else related to your medical schedule?"
+	],
+	"Update_Medical_Appointment": [
+		"Do you need to make any other changes to your appointments?",
+		"Would you like help with adjusting your medical visit details?",
+		"Is there anything else you want to update regarding your appointments?",
+		"Can I assist you with further updates to your medical schedule?"
+	],
+	"Get_Next_Appointment_Reminder": [
+		"Would you like reminders for any other upcoming appointments?",
+		"Do you need help with setting up more reminders?",
+		"Is there anything else you want to know about your appointments?",
+		"Can I assist you with additional reminders for your medical visits?"
+	],
+	"Log_Missed_Dose": [
+		"Do you need to log any other missed doses?",
+		"Would you like to adjust your medication tracking?",
+		"Is there anything else you need help with regarding missed doses?",
+		"Can I assist you with anything else related to your medication schedule?"
+	],
+	"Get_Adherence_Summary": [
+		"Would you like more details on your adherence?",
+		"Is there anything else you want to know about your medication compliance?",
+		"Do you need additional information on your adherence statistics?",
+		"Can I help you with anything else related to your adherence?"
+	],
+	"Adherence_Reminder": [
+		"Do you need reminders for any other medications?",
+		"Would you like help with setting up additional reminders?",
+		"Is there anything else you need regarding medication reminders?",
+		"Can I assist you with further reminders for your adherence?"
+	],
+	"Update_Adherence_Tracking": [
+		"Do you need to update any other tracking settings?",
+		"Would you like help with modifying your adherence preferences?",
+		"Is there anything else you want to adjust with your tracking?",
+		"Can I assist you with additional updates to your adherence tracking?"
+	],
+	"First_Aid_Info": [
+		"Do you need information on any other first aid topics?",
+		"Is there anything else you want to know about first aid?",
+		"Would you like assistance with another emergency situation?",
+		"Can I help you with more first aid information?"
+	],
+	"General_Small_Talk": [
+		"Do you want to chat about something else?",
+		"Is there anything else you’d like to discuss?",
+		"Would you like to continue our conversation?",
+		"Can I help with anything else or just chat?"
+	],
+	"Symptoms_Check": [
+		"Do you have any other symptoms you want to discuss?",
+		"Would you like to know more about symptom management?",
+		"Is there anything else related to your health symptoms?",
+		"Can I assist you with additional symptom checks?"
+	],
+	"Healthy_Lifestyle_Tips": [
+		"Do you need more tips on living healthily?",
+		"Is there another aspect of your lifestyle you want advice on?",
+		"Would you like more information on maintaining a healthy lifestyle?",
+		"Can I assist you with additional health tips?"
+	],
+	"Medication_Interactions": [
+		"Do you have other medications to check for interactions?",
+		"Would you like more information on drug interactions?",
+		"Is there anything else you need to know about your medications?",
+		"Can I help you with more details on medication interactions?"
+	],
+	"Locate_Nearest_Pharmacy": [
+		"Do you need help with finding other pharmacies?",
+		"Is there anything else you need related to pharmacy locations?",
+		"Would you like more information on nearby drugstores?",
+		"Can I assist you with finding additional pharmacies?"
+	],
+	"Emergency_Contact": [
+		"Do you need to set up any other emergency contacts?",
+		"Is there anything else you need to know about emergency contacts?",
+		"Would you like more information on managing emergency contacts?",
+		"Can I help you with additional emergency contact details?"
+	],
+	"Daily_Health_Check": [
+		"Do you need to log any other health stats?",
+		"Is there anything else you want to track for today?",
+		"Would you like help with more health logging?",
+		"Can I assist you with additional health check-ins?"
+	],
+	"General_Wellbeing_Check": [
+		"Do you need further assistance with your wellbeing?",
+		"Is there anything else you want to discuss about your health?",
+		"Would you like more support for your overall wellbeing?",
+		"Can I help with additional wellbeing checks?"
+	]
+}

@@ -2,21 +2,21 @@
 
 -- Entity table
 CREATE TABLE IF NOT EXISTS medications (
-    id VARCHAR(36) PRIMARY KEY,
+    id CHAR(36) PRIMARY KEY,
     brand_name VARCHAR(255) NOT NULL,
     generic_name VARCHAR(255),
     description TEXT,
     strength VARCHAR(20),
-    user_id VARCHAR(36),
+    -- user_id VARCHAR(36),
     dosage VARCHAR(255),
     dosage_form_id VARCHAR(36),
     medication_route_id VARCHAR(36),
     created_at INTEGER,
     updated_at INTEGER,
-    FOREIGN KEY (user_id)
-        REFERENCES users (id)
-            ON DELETE CASCADE
-            ON UPDATE CASCADE,
+    -- FOREIGN KEY (user_id)
+    --     REFERENCES users (id)
+    --         ON DELETE CASCADE
+    --         ON UPDATE CASCADE,
     FOREIGN KEY (dosage_form_id)
         REFERENCES dosage_forms (id)
             ON DELETE SET NULL

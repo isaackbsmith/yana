@@ -1,11 +1,11 @@
 from pathlib import Path
 import joblib
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 from sentence_transformers import SentenceTransformer
 
-from yana.utils.data_loader import load_json
+from yana.utils.data_loader import load_intent_train_test_pairs
 
 
 BASE_PATH = Path("yana/static/intents").resolve()
@@ -16,45 +16,27 @@ classifier_path = Path(BASE_PATH / "intent_classifier.pkl")
 data_path = Path(BASE_PATH / "intents.json")
 
 
-# Load data
-def load_intent_pairs(path: Path) -> tuple[list[str], list[str]]:
-    sentences: list[str] = []
-    intents: list[str] = []
-
-    # Get the intents and sentences
-    # { "intent": ["candidate", ...], ... }
-    data: dict[str, list[str]] = load_json(path)
-
-    for intent, candidates in data.items():
-        for candidate in candidates:
-            print(intent, candidate)
-            intents.append(intent)
-            sentences.append(candidate)
-
-    return intents, sentences
-
-
 def main() -> None:
     # Load and save model
-    model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer("all-MiniLM-L6-v2")
     model.save(str(model_path))
 
     # Get intent-sentence pairs
-    intents, sentences = load_intent_pairs(data_path)
+    X_train, _, y_train, _ = load_intent_train_test_pairs(data_path)
 
     # Compute embeddings
     print("Encoding data")
-    embeddings = model.encode(sentences, batch_size=10)
+    X_embeddings = model.encode(X_train, batch_size=10)
 
     # Save embeddings and intents
     print("Saving embeddings and intents")
-    joblib.dump(embeddings, embeddings_path)
-    joblib.dump(intents, intents_path)
+    joblib.dump(X_embeddings, embeddings_path)
+    joblib.dump(y_train, intents_path)
 
     # Create and train Support Vector Classifier (SVC)
     print("Training classifier")
-    classifier = make_pipeline(StandardScaler(), SVC(kernel="linear"))
-    classifier.fit(embeddings, intents)
+    classifier = make_pipeline(StandardScaler(), LinearSVC())
+    classifier.fit(X_embeddings, y_train)
 
     # Save tained classifier
     print("Saving classifier")

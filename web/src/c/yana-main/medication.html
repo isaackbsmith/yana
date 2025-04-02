@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | YANA</title>
+    <!-- ======= Styles ====== -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- =============== Navigation ================ -->
+    <div class="container">
+      <div class="navigation">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="heart-circle-outline"></ion-icon>
+              </span>
+              <span class="title">YANA</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="index.html">
+              <span class="icon">
+                <ion-icon name="home-outline"></ion-icon>
+              </span>
+              <span class="title">Dashboard</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="appointment.html">
+              <span class="icon">
+                <ion-icon name="calendar"></ion-icon>
+              </span>
+              <span class="title">Appointments</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="stats"></ion-icon>
+              </span>
+              <span class="title">Analysis</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="medication.html">
+              <span class="icon">
+                <ion-icon name="medkit-outline"></ion-icon>
+              </span>
+              <span class="title">Medication</span>
+            </a>
+          </li>
+
+          
+
+          <li>
+            <a href="FAQ.html">
+              <span class="icon">
+                <ion-icon name="help-outline"></ion-icon>
+              </span>
+              <span class="title">FAQ </span>
+            </a>
+          </li>
+
+          <li class="active">
+            <a href="settings.html">
+              <span class="icon">
+                <ion-icon name="settings-outline"></ion-icon>
+              </span>
+              <span class="title">Settings</span>
+            </a>
+          </li>
+
+          
+
+          <li>
+            <a href="#">
+              <span class="icon">
+                <ion-icon name="log-out-outline"></ion-icon>
+              </span>
+              <span class="title">Sign Out</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ========================= Main ==================== -->
+      <div class="main">
+        <div class="topbar">
+          <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+          </div>
+
+          <div class="search">
+            <label>
+              <input type="text" placeholder="Search here" />
+              <ion-icon name="search-outline"></ion-icon>
+            </label>
+          </div>
+
+          <div class="user">
+            <img src="assets/imgs/customer01.jpeg" alt="" />
+          </div>
+        </div>
+
+        <!-- ======================= Settings Content ================== -->
+        <div class="events-card">
+            <h2 class="events-card__title">Prescription Manager</h2>
+      
+            <form class="event-form" action="" method="post">
+              <div class="form-group">
+                <label for="medication" class="form-label">Medication Name</label>
+                <input
+                  type="text"
+                  id="medication"
+                  name="medication"
+                  class="form-input"
+                  required
+                  placeholder="Enter medication name"
+                />
+              </div>
+      
+              <div class="form-group">
+                <label for="strength" class="form-label">Strength</label>
+                <div class="form-group--inline">
+                  <input
+                    type="number"
+                    id="strength"
+                    name="strength"
+                    class="form-input form-input--small"
+                    required
+                    placeholder="500"
+                  />
+                  <select
+                    id="strength-unit"
+                    name="strength-unit"
+                    class="form-select"
+                    required
+                  >
+                    <option value="mg">mg</option>
+                    <option value="g">g</option>
+                    <option value="ml">ml</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <label for="dosage" class="form-label">Dosage</label>
+                <div class="form-group--inline">
+                  <input
+                    type="number"
+                    id="dosage"
+                    name="dosage"
+                    class="form-input form-input--small"
+                    required
+                    placeholder="2"
+                  />
+                  <select
+                    id="dosage-form"
+                    name="dosage-form"
+                    class="form-select"
+                    required
+                  >
+                    <option value="tablets">tablets</option>
+                    <option value="capsules">capsules</option>
+                    <option value="ml">ml</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <label for="frequency" class="form-label">Frequency</label>
+                <div class="form-group--inline">
+                  <input
+                    type="number"
+                    id="frequency-times"
+                    name="frequency-times"
+                    class="form-input form-input--small"
+                    required
+                    placeholder="2"
+                  />
+                  <span>times</span>
+                  <select
+                    id="frequency-period"
+                    name="frequency-period"
+                    class="form-select"
+                    required
+                  >
+                    <option value="daily">daily</option>
+                    <option value="weekly">weekly</option>
+                    <option value="monthly">monthly</option>
+                  </select>
+                </div>
+              </div>
+      
+              <div class="form-group">
+                <label for="intake-method" class="form-label">Intake Method</label>
+                <select
+                  id="intake-method"
+                  name="intake-method"
+                  class="form-select"
+                  required
+                >
+                  <option value="">Select intake method</option>
+                  <option value="oral">Oral (by mouth)</option>
+                  <option value="topical">Topical (on the skin)</option>
+                  <option value="injection">Injection</option>
+                  <option value="inhaled">Inhaled</option>
+                  <option value="sublingual">Sublingual (under the tongue)</option>
+                  <option value="rectal">Rectal</option>
+                  <option value="ophthalmic">Ophthalmic (in the eye)</option>
+                </select>
+              </div>
+      
+              <div class="form-group">
+                <label class="form-label" for="start-date">Start date</label>
+                <input
+                  class="form-input"
+                  type="datetime-local"
+                  id="start-date"
+                  name="start-date"
+                  required
+                />
+              </div>
+      
+              <div class="form-group">
+                <label class="form-label" for="end-date">End date</label>
+                <input
+                  class="form-input"
+                  type="datetime-local"
+                  id="end-date"
+                  name="end-date"
+                  required
+                />
+              </div>
+      
+              <div class="form-group">
+                <label for="time" class="form-label">Time</label>
+                <input
+                  type="time"
+                  id="time"
+                  name="time"
+                  class="form-input"
+                  required
+                />
+              </div>
+      
+              <div class="form-group form-group--full">
+                <label for="instructions" class="form-label"
+                  >Special Instructions</label
+                >
+                <textarea
+                  id="instructions"
+                  name="instructions"
+                  class="form-input"
+                  rows="3"
+                  placeholder="Enter any special instructions or notes. Example; mustbe taken after meals"
+                ></textarea>
+              </div>
+      
+              <button type="submit" class="btn btn--add">Add Medication</button>
+            </form>
+      
+            <div class="events-container">
+              <span class="events__title">Upcoming reminders </span>
+              <ul class="events__list">
+                <li class="events__item">
+                  <div class="events__item--left">
+                    <span class="events__name">paracetamol 2 tablets</span>
+                    <span class="events__date">Oct 5</span>
+                  </div>
+                  <div class="events__item--right">
+                    <span class="events__tag">16:00</span>
+                    <button class="btn btn--delete">Delete</button>
+                  </div>
+                </li>
+                <li class="events__item">
+                  <div class="events__item--left">
+                    <span class="events__name">paracetamol 2 tablets</span>
+                    <span class="events__date">Oct 7</span>
+                  </div>
+                  <div class="events__item--right">
+                    <span class="events__tag">10:00</span>
+                    <button class="btn btn--delete">Delete</button>
+                  </div>
+                </li>
+                <li class="events__item">
+                  <div class="events__item--left">
+                    <span class="events__name">paracetamol 2 tablets</span>
+                    <span class="events__date">Oct 16 - Oct 18</span>
+                  </div>
+                  <div class="events__item--right">
+                    <span class="events__tag">10:00</span>
+                    <!-- <span class="events__tag events__tag--highlighted">All day</span> -->
+                    <button class="btn btn--delete">Delete</button>
+                  </div>
+                </li>
+                <li class="events__item">
+                  <div class="events__item--left">
+                    <span class="events__name">paracetamol 2 tablets</span>
+                    <span class="events__date">Oct 27 - Oct 28</span>
+                  </div>
+                  <div class="events__item--right">
+                    <span class="events__tag">10:00</span>
+                    <button class="btn btn--delete">Delete</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+    <!-- =========== Scripts =========  -->
+    <script src="assets/js/main.js"></script>
+
+    <!-- ====== ionicons ======= -->
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+
+    
+  </body>
+</html>

@@ -5,5 +5,4 @@ class AppointmentSchema(BaseModel):
     id: str
     reason: str
     location: str
-    user_id: str
-
+    # user_id: str

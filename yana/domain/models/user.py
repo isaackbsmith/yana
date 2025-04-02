@@ -2,6 +2,7 @@ from enum import Enum
 from typing import Self
 from pydantic import BaseModel, EmailStr
 
+
 class Gender(str, Enum):
     MALE = "male"
     FEMALE = "female"

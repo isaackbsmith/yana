@@ -4,7 +4,7 @@ import bcrypt
 from yana.data.queries.users import delete_user, insert_user, select_user, update_user
 from yana.data.schemas.user import NewUserSchema, UserSchema
 from yana.domain.exceptions import QueryError, ServiceError
-from yana.domain.models.user import Gender, NewUserModel, UserModel, UserType
+from yana.domain.models.user import BaseUserModel, Gender, NewUserModel, UserModel, UserType
 from yana.domain.types import YANAConfig
 from yana.domain.logger import api_logger
 
@@ -20,7 +20,7 @@ async def fetch_user(config: YANAConfig, user_id: str) -> UserModel | None:
                 email=result.email,
                 phone_number=result.phone_number,
                 gender=Gender.try_from_str(result.gender),
-                user_type=UserType.try_from_str(result.user_type)
+                user_type=UserType.try_from_str(result.user_type),
             )
             return user
         return None
@@ -29,8 +29,7 @@ async def fetch_user(config: YANAConfig, user_id: str) -> UserModel | None:
         raise ServiceError("User Service Error")
 
 
-async def create_user(config: YANAConfig, user: NewUserModel) -> None:
-
+async def create_user(config: YANAConfig, user: NewUserModel) -> UserModel:
     # hash password
     hashed_pw = bcrypt.hashpw(user.password.encode("utf-8"), bcrypt.gensalt())
 
@@ -39,32 +38,33 @@ async def create_user(config: YANAConfig, user: NewUserModel) -> None:
 
     # Create user with id
     new_user = NewUserSchema(
-        id = user_id,
-        first_name = user.first_name,
-        last_name = user.last_name,
-        email = str(user.email),
-        phone_number = user.phone_number,
-        password = hashed_pw.decode("utf-8"),
-        gender = user.gender.value,
-        user_type = user.user_type.value,
+        id=user_id,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        email=str(user.email),
+        phone_number=user.phone_number,
+        password=hashed_pw.decode("utf-8"),
+        gender=user.gender.value,
+        user_type=user.user_type.value,
     )
 
     try:
         await insert_user(config, new_user)
+        return cast(UserModel, await fetch_user(config, user_id))
     except QueryError:
         api_logger.error("An error occurred creating user")
         raise ServiceError("User Service Error")
 
 
-async def modify_user(config: YANAConfig, user: UserModel) -> UserModel:
+async def modify_user(config: YANAConfig, user: BaseUserModel, user_id: str) -> UserModel:
     updated_user = UserSchema(
-        id = user.id,
-        first_name = user.first_name,
-        last_name = user.last_name,
-        email = str(user.email),
-        phone_number = user.phone_number,
-        gender = user.gender.value,
-        user_type = user.user_type.value,
+        id=user_id,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        email=str(user.email),
+        phone_number=user.phone_number,
+        gender=user.gender.value,
+        user_type=user.user_type.value,
     )
 
     try:
@@ -81,7 +81,3 @@ async def remove_user(config: YANAConfig, user_id: str) -> None:
     except QueryError:
         api_logger.error("An error occurred deleting user")
         raise ServiceError("User Service Error")
-
-
-
-
